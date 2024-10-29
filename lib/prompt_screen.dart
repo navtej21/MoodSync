@@ -139,14 +139,20 @@ class _PromptScreenState extends State<PromptScreen> {
   }
 
   Future<void> _openSpotify() async {
-    final playlistQuery = _playlist
-        .map((song) => '${song['artist']} - ${song['title']}')
-        .join(', ');
-    final url = Uri.parse('https://open.spotify.com/search/$playlistQuery');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    } else {
-      throw 'Could not launch $url';
+    for (var song in _playlist) {
+      final query = Uri.encodeComponent('${song['artist']} - ${song['title']}');
+      final url = Uri.parse('https://open.spotify.com/search/playlist/$query');
+
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url,
+            mode: LaunchMode.externalApplication, webOnlyWindowName: '_blank');
+      } else {
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url, mode: LaunchMode.inAppWebView);
+        } else {
+          throw 'could not launch $url';
+        }
+      }
     }
   }
 
