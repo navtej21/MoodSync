@@ -24,20 +24,17 @@ class PromptScreen extends StatefulWidget {
 class _PromptScreenState extends State<PromptScreen> {
   //Genre List
   final List<String> genres = [
-    'Jazz',
-    'Rock',
-    'Amapiano',
-    'R&B',
-    'Latin',
-    'Hip-Hop',
-    'Hip-Life',
-    'Reggae',
-    'Gospel',
-    'Afrobeat',
-    'Blues',
-    'Country',
-    'Punk',
-    'Pop',
+    'BollyWood',
+    'Indie Pop',
+    'Desi Hip-Hop',
+    'Punjabi Pop',
+    'Ghazal',
+    'Malayalam',
+    'Vintage',
+    'Sufi Music',
+    'Tamil',
+    'Classical Fusion',
+    'Folk Fusion',
   ];
 //selected genres list
   final Set<String> _selectedGenres = {};
@@ -82,7 +79,7 @@ class _PromptScreenState extends State<PromptScreen> {
     // Construct the prompt text
     final promptText = 'I want just a listed music playlist for '
         'Mood: $_selectedMood, Genres: ${_selectedGenres.join(', ')} '
-        'in the format {artist:title} generate 10 records don"t generate any ';
+        'in the format {artist:title} generate 30 records don"t generate any ';
 
     // Get API key from environment variables
     final apikey = dotenv.env['GEMINI_API_KEY'];
@@ -562,94 +559,118 @@ class _PromptScreenState extends State<PromptScreen> {
                             itemBuilder: (context, index) {
                               final song = _playlist[index];
 
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 16.0,
-                                  right: 14.0,
-                                  bottom: 20.0,
-                                ),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  padding: const EdgeInsets.all(16.0),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFFFCCCC)
-                                        .withOpacity(0.3),
-                                    borderRadius: BorderRadius.circular(30.0),
+                              return GestureDetector(
+                                onTap: () async {
+                                  final query = Uri.encodeComponent(
+                                      '${song['artist']} ${song['title']}');
+                                  final url = Uri.parse(
+                                      'https://www.youtube.com/results?search_query=$query');
+
+                                  try {
+                                    // Attempt to launch the YouTube search URL in an external application
+                                    if (await canLaunchUrl(url)) {
+                                      await launchUrl(url,
+                                          mode: LaunchMode.externalApplication);
+                                    } else {
+                                      throw 'Could not launch URL';
+                                    }
+                                  } catch (e) {
+                                    // Handle any errors that might occur during URL launching
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Error: $e')),
+                                    );
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 16.0,
+                                    right: 14.0,
+                                    bottom: 20.0,
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.all(8.0),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFFFCCCC)
-                                              .withOpacity(0.3),
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
-                                        child: Container(
-                                          height: 65.0,
-                                          width: 65.0,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: const EdgeInsets.all(16.0),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFCCCC)
+                                          .withOpacity(0.3),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(8.0),
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFFFFFFFF),
+                                            color: const Color(0xFFFFCCCC)
+                                                .withOpacity(0.3),
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
-                                            image: const DecorationImage(
-                                              image: AssetImage(
-                                                "assets/images/sonnetlogo.png",
+                                          ),
+                                          child: Container(
+                                            height: 65.0,
+                                            width: 65.0,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFFFFFFF),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              image: const DecorationImage(
+                                                image: AssetImage(
+                                                  "assets/images/sonnetlogo.png",
+                                                ),
+                                                fit: BoxFit.cover,
                                               ),
-                                              fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 16.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.5,
-                                              child: Text(
-                                                song['artist']!.substring(3),
-                                                style: const TextStyle(
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Color(0xFFFFFFFF),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 16.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.5,
+                                                child: Text(
+                                                  song['artist']!.substring(3),
+                                                  style: const TextStyle(
+                                                    fontSize: 14.0,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Color(0xFFFFFFFF),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  maxLines: 1,
                                                 ),
-                                                maxLines: 1,
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.5,
-                                              child: Text(
-                                                song['title']!,
-                                                style: const TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFFFFFFFF),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.5,
+                                                child: Text(
+                                                  song['title']!,
+                                                  style: const TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color(0xFFFFFFFF),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  maxLines: 1,
                                                 ),
-                                                maxLines: 1,
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
