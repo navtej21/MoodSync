@@ -132,7 +132,12 @@ class _RegistrationPage extends State<RegistrationPage> {
                 color: Colors.white,
               ),
             ),
-            child: const Text("Register"),
+            child: const Text(
+              "Register",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 15),
@@ -143,7 +148,12 @@ class _RegistrationPage extends State<RegistrationPage> {
                   builder: (context) => LoginScreen(account: widget.account)),
             );
           },
-          child: const Text("Already Have An Account? Login!"),
+          child: const Text(
+            "Already Have An Account? Login!",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
       ],
     );

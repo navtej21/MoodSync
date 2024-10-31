@@ -117,7 +117,12 @@ class _LoginPage extends State<LoginScreen> {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const TooglePage()));
           },
-          child: const Text("Login"),
+          child: const Text(
+            "Login",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
       ],
     );
