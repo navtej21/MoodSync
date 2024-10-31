@@ -4,11 +4,17 @@
 
 📲 Screenshots ///////////////////////////////////////
 
-📥 Installation Guide This guide will help you set up MoodSync on your local machine.
+📥 Installation Guide 
 
-Prerequisites To get started, make sure your system meets the following requirements:
+This guide will help you set up MoodSync on your local machine.
 
-Flutter SDK: Version 3.5.2 or later is required. Follow the Flutter installation guide to set up Flutter on your machine. Be sure to add Flutter to your system's PATH. Dart SDK: Compatible with Flutter SDK 3.5.2. The Dart SDK is included with Flutter, so it will be installed alongside Flutter. Appwrite Server (optional): Appwrite is used as the backend service for this project. If you plan to utilize Appwrite, set up an Appwrite server and configure your Appwrite credentials in the .env file (details below). Steps to Install and Run MoodSync
+Prerequisites 
+To get started, make sure your system meets the following requirements:
+
+Flutter SDK: Version 3.5.2 or later is required. 
+Follow the Flutter installation guide to set up Flutter on your machine. Be sure to add Flutter to your system's PATH. 
+Dart SDK: Compatible with Flutter SDK 3.5.2. The Dart SDK is included with Flutter, so it will be installed alongside Flutter. 
+Appwrite Server (optional): Appwrite is used as the backend service for this project. If you plan to utilize Appwrite, set up an Appwrite server and configure your Appwrite credentials in the .env file (details below). Steps to Install and Run MoodSync
 
 1.Clone the Repository Begin by cloning the repository from GitHub:
 
@@ -28,11 +34,14 @@ This will download and set up all required packages, such as appwrite, flutter_s
 
 The MoodSync app uses environment variables to manage sensitive information (like API keys). To set these up:
 
-.Create a .env file in the root directory of the project.
+  .Create a .env file in the root directory of the project.
 
-.Open .env and add your API keys and other necessary environment variables in this format:
+  .Open .env and add your API keys and other necessary environment variables in this format:
 
-APPWRITE_PROJECT_ID=your_project_id APPWRITE_API_KEY=your_api_key GOOGLE_GENERATIVE_AI_API_KEY=your_generative_ai_key
+APPWRITE_PROJECT_ID=your_project_id
+APPWRITE_API_KEY=your_api_key
+GOOGLE_GENERATIVE_AI_API_KEY=your_generative_ai_key
+
 
 Refer to a provided .env.example file (if available) for guidance on all necessary keys and their formats.
 
@@ -44,7 +53,9 @@ To launch the app, execute the following command:
 
 flutter run
 
-Android: Make sure you have an Android emulator set up, or connect a physical Android device. iOS: Ensure you have Xcode installed and an iOS simulator or a physical iOS device connected. Web: Run the app with flutter run -d chrome to view the application on the web.
+Android: Make sure you have an Android emulator set up, or connect a physical Android device. 
+iOS: Ensure you have Xcode installed and an iOS simulator or a physical iOS device connected. 
+Web: Run the app with flutter run -d chrome to view the application on the web.
 
 5.Configure Appwrite (Optional)
 
