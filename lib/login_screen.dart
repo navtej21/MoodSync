@@ -31,48 +31,77 @@ class _LoginPage extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'MoodSync',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 20),
-              _buildTextField(
-                  controller: emailController, labelText: 'Enter Email'),
-              SizedBox(height: 16),
-              _buildTextField(
-                  controller: passwordController,
-                  labelText: 'Enter Password',
-                  obscureText: true),
-              SizedBox(height: 16),
-              _buildButtonRow()
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: AlignmentDirectional.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 99, 7, 7),
+              Color.fromARGB(255, 16, 15, 15),
             ],
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'MoodSync',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 48,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                _buildTextField(
+                  controller: emailController,
+                  labelText: 'Enter Email',
+                  textColor: const Color.fromARGB(255, 239, 230, 230),
+                ),
+                const SizedBox(height: 16),
+                _buildTextField(
+                    controller: passwordController,
+                    labelText: 'Enter Password',
+                    textColor: const Color.fromARGB(255, 239, 230, 230),
+                    obscureText: true),
+                const SizedBox(height: 16),
+                _buildButtonRow()
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildTextField(
-      {required TextEditingController controller,
-      required String labelText,
-      bool obscureText = false}) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String labelText,
+    bool obscureText = false,
+    Color textColor = Colors.black,
+  }) {
     return TextField(
       controller: controller,
       obscureText: obscureText,
+      style: TextStyle(color: textColor),
       decoration: InputDecoration(
         labelText: labelText,
-        border: OutlineInputBorder(),
+        labelStyle: const TextStyle(
+          color: Colors.white,
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white30),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -81,14 +110,14 @@ class _LoginPage extends State<LoginScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         TextButton(
           onPressed: () {
             login(emailController.text, passwordController.text);
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => TooglePage()));
+                MaterialPageRoute(builder: (context) => const TooglePage()));
           },
-          child: Text("Login"),
+          child: const Text("Login"),
         ),
       ],
     );

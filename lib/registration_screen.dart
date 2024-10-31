@@ -33,50 +33,84 @@ class _RegistrationPage extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'MoodSync',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: AlignmentDirectional.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 99, 7, 7),
+              Color.fromARGB(255, 16, 15, 15),
+            ],
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'MoodSync',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 48,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 20),
-              _buildTextField(
-                  controller: emailController, labelText: 'Enter Email'),
-              SizedBox(height: 16),
-              _buildTextField(
+                const SizedBox(height: 20),
+                _buildTextField(
+                  controller: emailController,
+                  labelText: 'Enter Email',
+                  textColor: const Color.fromARGB(255, 239, 230, 230),
+                ),
+                const SizedBox(height: 16),
+                _buildTextField(
                   controller: passwordController,
                   labelText: 'Enter Password',
-                  obscureText: true),
-              SizedBox(height: 16),
-              _buildTextField(controller: nameController, labelText: 'Name'),
-              SizedBox(height: 24),
-              _buildButtonRow()
-            ],
+                  textColor: const Color.fromARGB(255, 239, 230, 230),
+                  obscureText: true,
+                ),
+                const SizedBox(height: 16),
+                _buildTextField(
+                  controller: nameController,
+                  labelText: 'Name',
+                  textColor: const Color.fromARGB(255, 239, 230, 230),
+                ),
+                const SizedBox(height: 24),
+                _buildButtonRow()
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildTextField(
-      {required TextEditingController controller,
-      required String labelText,
-      bool obscureText = false}) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String labelText,
+    bool obscureText = false,
+    Color textColor = Colors.black,
+  }) {
     return TextField(
       controller: controller,
       obscureText: obscureText,
+      style: TextStyle(color: textColor),
       decoration: InputDecoration(
         labelText: labelText,
-        border: OutlineInputBorder(),
+        labelStyle: const TextStyle(
+          color: Colors.white,
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white30),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -93,10 +127,15 @@ class _RegistrationPage extends State<RegistrationPage> {
               register(emailController.text, passwordController.text,
                   nameController.text);
             },
-            child: Text("Register"),
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(
+                color: Colors.white,
+              ),
+            ),
+            child: const Text("Register"),
           ),
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         TextButton(
           onPressed: () {
             Navigator.of(context).pushReplacement(
@@ -104,7 +143,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                   builder: (context) => LoginScreen(account: widget.account)),
             );
           },
-          child: Text("Already Have An Account? Login!"),
+          child: const Text("Already Have An Account? Login!"),
         ),
       ],
     );
