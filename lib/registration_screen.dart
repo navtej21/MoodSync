@@ -22,7 +22,7 @@ class _RegistrationPage extends State<RegistrationPage> {
     try {
       await widget.account.create(
           userId: ID.unique(), email: email, password: password, name: name);
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => LoginScreen(account: widget.account)));
     } catch (e) {
       ScaffoldMessenger.of(context)
