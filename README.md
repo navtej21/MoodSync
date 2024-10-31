@@ -14,8 +14,8 @@
 <h2>📲 Screenshots</h2>
 <!-- Add image tags with links to screenshots -->
 <p>
-  <img src="images/screenshot1.jpg" width="250" alt="Screenshot 1">
-  <img src="images/screenshot2.jpg" width="250" alt="Screenshot 2">
+  <img src="screenshot1.jpg" width="250" alt="Screenshot 1">
+  <img src="screenshot2.jpg" width="250" alt="Screenshot 2">
 </p>
 
 <h2>📥 Installation Guide</h2>
