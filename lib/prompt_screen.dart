@@ -182,8 +182,8 @@ class _PromptScreenState extends State<PromptScreen> {
             begin: Alignment.topCenter,
             end: AlignmentDirectional.bottomCenter,
             colors: [
-              Color(0xFF330000),
-              Color(0xFF000000),
+              Color.fromARGB(255, 99, 7, 7),
+              Color.fromARGB(255, 16, 15, 15),
             ],
           ),
           image: DecorationImage(

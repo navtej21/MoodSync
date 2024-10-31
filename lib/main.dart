@@ -12,7 +12,10 @@ void main() async {
   final client =
       Client().setEndpoint(APPWRITE_URL).setProject(APPWRITE_PROJECT_ID);
   Account account = Account(client);
-  runApp(MaterialApp(
-    home: RegistrationPage(account: account),
-  ));
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: RegistrationPage(account: account),
+    ),
+  );
 }
